@@ -5,11 +5,11 @@ import { Member } from '../member';
 import {MemberService} from '../services/member.service'
 
 @Component({
-  selector: 'app-members',  //  コンポーネントのCSS要素セレクター
-  templateUrl: './members.component.html', //コンポーネントのテンプレートファイルの場所
-  styleUrls: ['./members.component.css'] // コンポーネントのプライベートCSSスタイルの場所
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class MembersComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   members :Member[] =[];
 
   constructor(private memberService:MemberService) { }
@@ -21,7 +21,8 @@ export class MembersComponent implements OnInit {
   private getMembers():void{
     this.memberService.getMembers()
                       .subscribe(
-                        mems => this.members = mems
+                        mems => this.members = mems.slice(1, 5)
                       );
   }
+
 }

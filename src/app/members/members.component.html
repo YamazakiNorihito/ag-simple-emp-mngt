@@ -1,11 +1,8 @@
 <h2>My Emploee</h2>
 <ul class="heroes">
-  <li *ngFor="let mem of members"
-    [class.selected]="mem === selectedMember"
-    (click)="onSelect(mem)">
-    <span class="badge">{{mem.id}}</span> {{mem.name}}
+  <li *ngFor="let mem of members">
+    <a routerLink="/detail/{{mem.id}}">
+      <span class="badge">{{mem.id}}</span> {{mem.name}}
+    </a>
   </li>
 </ul>
-
-<app-member-detail [mem]="selectedMember"></app-member-detail>
-<app-messages></app-messages>

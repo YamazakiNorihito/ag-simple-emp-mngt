@@ -15,8 +15,16 @@ export class MemberService {
 
   constructor(private messageService: MessageService) { }
 
-  getMember() :Observable<Member[]>{
+  getMembers() :Observable<Member[]>{
     this.messageService.add('MemberService: fetched heroes');
     return of(MEMBERS);
+  }
+
+
+  getMember(id:Number):Observable<Member>{
+    let mem = MEMBERS.find(h => h.id === id)!;
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+
+    return of(mem);
   }
 }
