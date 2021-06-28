@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Member } from '../member';
 
-import {MEMBERS} from '../mock-members'
+import {MemberService} from '../services/member.service'
+import {MessageService} from './../services/message.service'
 
 @Component({
   selector: 'app-members',  //  コンポーネントのCSS要素セレクター
@@ -10,16 +11,25 @@ import {MEMBERS} from '../mock-members'
   styleUrls: ['./members.component.css'] // コンポーネントのプライベートCSSスタイルの場所
 })
 export class MembersComponent implements OnInit {
-  members = MEMBERS;
+  members :Member[] =[];
 
   selectedMember?: Member;
 
-  constructor() { }
+  constructor(private memberService:MemberService, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getMembers();
+  }
+
+  private getMembers():void{
+    this.memberService.getMember()
+                      .subscribe(
+                        mems => this.members = mems
+                      );
   }
 
   onSelect(mem: Member): void {
     this.selectedMember = mem;
+    this.messageService.add(`MembersComponent: Selected hero id=${mem.id}`);
   }
 }
