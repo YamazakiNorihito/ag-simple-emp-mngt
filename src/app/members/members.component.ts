@@ -18,6 +18,20 @@ export class MembersComponent implements OnInit {
     this.getMembers();
   }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.memberService.addMember({ name } as Member)
+      .subscribe(mem => {
+        this.members.push(mem);
+      });
+  }
+
+  delete(mem: Member): void {
+    this.members = this.members.filter(h => h !== mem);
+    this.memberService.deleteMember(mem.id).subscribe();
+  }
+
   private getMembers():void{
     this.memberService.getMembers()
                       .subscribe(

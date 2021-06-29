@@ -41,6 +41,13 @@ export class MemberDetailComponent implements OnInit {
     .subscribe(mems => this.member = mems)
   }
 
+  save(): void {
+    if (this.member) {
+      this.memService.updateMember(this.member)
+        .subscribe(() => this.goBack());
+    }
+  }
+
   goBack(): void {
     this.location.back();
   }

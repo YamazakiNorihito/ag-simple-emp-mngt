@@ -1,8 +1,21 @@
-<h2>My Emploee</h2>
+<h2>My Heroes</h2>
+
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #MemberName />
+
+  <!-- (click) 入力値をadd()に渡したあと、入力をクリアする -->
+  <button class="add-button" (click)="add(MemberName.value); MemberName.value=''">
+    Add hero
+  </button>
+</div>
+
 <ul class="heroes">
   <li *ngFor="let mem of members">
     <a routerLink="/detail/{{mem.id}}">
       <span class="badge">{{mem.id}}</span> {{mem.name}}
     </a>
+    <button class="delete" title="delete mem"
+      (click)="delete(mem)">x</button>
   </li>
 </ul>
